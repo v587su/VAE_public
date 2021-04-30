@@ -22,10 +22,10 @@ def train(args):
     cuda_condition = args.with_cuda == 1
     device = torch.device("cuda:0" if cuda_condition else "cpu")
 
-    corpus_train = QueryDataset('{}/so_train.txt'.format(args.train_data_dir),
+    corpus_train = QueryDataset('{}/query_corpus.txt'.format(args.train_data_dir),
                                 word_vocab, args.query_len)
 
-    corpus_val = QueryDataset('{}/so_train.txt'.format(args.train_data_dir),
+    corpus_val = QueryDataset('{}/query_corpus.txt'.format(args.train_data_dir),
                               word_vocab, args.query_len)
 
     train_data_loader = DataLoader(
@@ -158,7 +158,7 @@ def args_parser():
 
     parser.add_argument('-cuda', "--with_cuda", type=int, default=1)
     parser.add_argument("--log_freq", type=int, default=10)
-    parser.add_argument("--val_freq", type=int, default=10000)
+    parser.add_argument("--val_freq", type=int, default=100000)
 
     parser.add_argument("--lr", type=float, default=1e-4)
     parser.add_argument("--decay_ratio", type=float, default=0.95)
